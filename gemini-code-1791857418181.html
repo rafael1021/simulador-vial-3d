@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Vial 3D - ISM Santa Marta</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Contenedor del Canvas 3D -->
+  <div id="canvas-container"></div>
+
+  <!-- Panel Lateral Modular de Controles y Métricas -->
+  <aside id="sidebar">
+    <h2>Simulador Vial 3D</h2>
+    <p class="subtitle">Análisis Geométrico y Presupuestal de Fallas Viales</p>
+    
+    <div class="control-group">
+      <label for="ancho">Ancho del Socavón (2x): <span id="val-ancho">2.50</span> m</label>
+      <input type="range" id="ancho" min="0.50" max="6.00" step="0.05" value="2.50">
+    </div>
+
+    <div class="control-group">
+      <label for="profundidad">Profundidad Máxima (c): <span id="val-profundidad">0.15</span> m</label>
+      <input type="range" id="profundidad" min="0.02" max="0.50" step="0.01" value="0.15">
+    </div>
+
+    <div class="control-group">
+      <label for="tramo">Longitud del Tramo (L): <span id="val-tramo">10.00</span> m</label>
+      <input type="range" id="tramo" min="1.00" max="50.00" step="0.50" value="10.00">
+    </div>
+
+    <div class="metrics-panel">
+      <h3>Métricas en Tiempo Real</h3>
+      
+      <!-- Ecuación Cuadrática -->
+      <div class="metric-card">
+        <span class="label">Área Sección Transversal:</span>
+        <span class="value"><span id="m-area">0.000</span> m²</span>
+        <small>A = (4/3) · x · c (Parábola)</small>
+      </div>
+
+      <!-- Operaciones Decimales Exactas -->
+      <div class="metric-card">
+        <span class="label">Volumen Asfalto Requerido:</span>
+        <span class="value"><span id="m-volumen">0.000</span> m³</span>
+        <small>V = Área · L (Precisión Decimal)</small>
+      </div>
+
+      <div class="metric-card">
+        <span class="label">Masa Total de Mezcla:</span>
+        <span class="value"><span id="m-masa">0.00</span> Toneladas</span>
+        <small>M = V · 2.35 t/m³</small>
+      </div>
+
+      <!-- Ecuación Lineal -->
+      <div class="metric-card highlight">
+        <span class="label">Costo Total Estimado:</span>
+        <span class="value">$<span id="m-costo">0.00</span> COP</span>
+        <small>C(V) = V · 450,000 + 1,200,000</small>
+      </div>
+    </div>
+  </aside>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
